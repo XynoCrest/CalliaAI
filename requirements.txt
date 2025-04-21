@@ -1,0 +1,12 @@
+numpy
+torch
+torchaudio
+soundfile
+sounddevice
+langchain
+langgraph
+langchain-core
+langchain_groq
+groq
+cartesia
+elevenlabs
