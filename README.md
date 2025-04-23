@@ -6,13 +6,13 @@
 [![LangChain](https://img.shields.io/badge/LangChain-black?style=plastic&logo=langchain&logoColor=black&labelColor=63baaa&color=black)](https://www.langchain.com/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-black?style=plastic&logo=langchain&logoColor=black&labelColor=50f036&color=black)](https://www.langchain.com/langgraph)
 
-Callia is a modular real-time voice assistant that is attuned to your every word! It listens on the microphone, detects when you're speaking, transcribes your speech, and synthesizes a spoken response. The followinng is an illustration of the pipeline - 
+Callia is a modular real-time voice assistant that is attuned to your every word! It listens on the microphone, detects when you're speaking, transcribes your speech, and synthesizes a spoken response. The following is an illustration of the pipeline - 
 
 <img src="https://imgur.com/VP9u7RD.png" />
 
 ## 🛠️ Installation
 
-**Please follow the following steps:** 
+**Please proceed with the following steps:** 
 
 1. &nbsp;**Clone the repository**
    
@@ -97,5 +97,6 @@ Callia/
 ├── synthesis_elevenlabs.py      # TTS using ElevenLabs
 ├── key_retriever.py             # Your API key(s) retriever
 ├── requirements.txt             # Dependencies
+├── .gitignore                   # Tells git what to ignore
 └── README.md                    # You're reading this
 ```
