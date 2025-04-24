@@ -47,5 +47,6 @@ def transcribe_audio(audio_bytes, stop_event):
     print()
 
     # Generate Speech
-    synthesize_audio(response, stop_event)
+    pronounciation = re.sub(r"callia", "Kallia", response, flags=re.IGNORECASE) # Fixes ambiguity in Callia Pronounciation
+    synthesize_audio(pronounciation, stop_event)
     return

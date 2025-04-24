@@ -1,4 +1,5 @@
 from elevenlabs.client import ElevenLabs
+from elevenlabs.core.api_error import ApiError
 from key_retriever import get_elevenlabs_key
 import shutil
 import subprocess
@@ -20,6 +21,10 @@ def synthesize_audio(input: str, stop_event):
         voice_id = "aMSt68OGf4xUZAnLpTU8",
         model_id = "eleven_flash_v2"
     )
+
+    # Cache the input incase of API Error
+    global cached_input 
+    cached_input = input
 
     # Generate and Stream speech from the input text
     stream(audio_stream, stop_event)
@@ -46,15 +51,20 @@ def stream(audio_stream: Iterator[bytes], stop_event: threading.Event) -> bytes:
     )
 
     audio = b""
-    for chunk in audio_stream:
-        if stop_event.is_set():
-            break
-        if chunk is not None:
-            mpv_process.stdin.write(chunk)
-            mpv_process.stdin.flush()
-            audio += chunk
-    if mpv_process.stdin:
-        mpv_process.stdin.close()
-    mpv_process.wait()
+    try:
+        for chunk in audio_stream:
+            if stop_event.is_set():
+                break
+            if chunk is not None:
+                mpv_process.stdin.write(chunk)
+                mpv_process.stdin.flush()
+                audio += chunk
+    except ApiError as e:
+        print("API Error: Retrying with different key!")
+        synthesize_audio(cached_input, stop_event)
+    finally:
+        if mpv_process.stdin:
+            mpv_process.stdin.close()
+        mpv_process.wait()
 
     return audio
