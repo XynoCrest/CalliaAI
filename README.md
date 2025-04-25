@@ -37,8 +37,8 @@ Callia is a modular real-time voice assistant that is attuned to your every word
    ```
 5. &nbsp;**Install MPV**
    - Download and Install [MPV](https://mpv.io/)
-   - Add the folder containing `mpv.exe` to your PATH envionment variable
-   - MPV is required to play the stream output audio
+   - Add the folder containing `mpv.exe` to your PATH environment variable.
+   - MPV is required to play the stream output audio.
 <br>
 
 ## 🔑 API Keys
@@ -54,7 +54,7 @@ def get_elevenlabs_key():
     # List of ElevenLabs Keys
     keys = []   <- Add your key as a list item
 ```
-- At least one **GROQ** API Key is required
+- At least one **GROQ** API Key is required!
 <br>
 
 ## 🔄 Switching TTS Engines

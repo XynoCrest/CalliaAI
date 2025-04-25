@@ -1,5 +1,6 @@
 import time
 import re
+import inflect
 from groq import Groq
 from inference import brain
 from key_retriever import get_groq_key
@@ -40,9 +41,18 @@ def transcribe_audio(audio_bytes, stop_event):
     print(f"Latency - {round((api_call_latency_end - api_call_latency_start) * 1000)} ms")
     print()
 
+    # Initialize inflect engine for number-to-word conversion
+    p = inflect.engine()
+    # Replaces phone number to its spelled out equivalent
+    def phone_replacer(text: str) -> str:
+        def replacer(match):
+            return ", ".join(" ".join(p.number_to_words(int(digit)) for digit in group) for group in match.groups())
+        
+        # Apply the replacement for phone numbers in the format 123-123-1234
+        return re.sub(r"(\d{3})-(\d{3})-(\d{4})", replacer, text)
+    
     # Generate Reponse
-    clean_numbers = re.sub(r'(?<=\d)-(?=\d)', '', user_input) # Clean dashes inbetween numbers
-    response = brain(clean_numbers)
+    response = brain(phone_replacer(user_input))
     print(f"AI: {response}")
     print()
 

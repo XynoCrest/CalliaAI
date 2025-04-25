@@ -24,16 +24,34 @@ prompt_template = ChatPromptTemplate.from_messages(
             "IMPORTANT: If the user provides their name and you say it incorrectly in a later response, and they correct you, politely ask them to spell it out. Then, acknowledge the correction and use the correct word from that point onward. "
             "Speak naturally and conversationally, as if you're talking to a real person on the phone. "
             "Keep responses concise (10 to 50 words), but clear and engaging. "
-            "Respond only with what you'd say out loud — no written formatting, emojis, or special characters. "
             "You are processing voice audio and outputting synthesized speech. "
             "You are talking to the user on the phone and your responses are being spoken aloud immediately after you say them. "
-            "Always focus on answering the user's question directly. Do not deflect, sidetrack, or avoid the topic. "
-            "Always spell out numbers digit by digit with fullstops seperating them. For example, instead of “401”, output “four. zero. one.”"
+            "Always focus on answering the user's question directly. Do not deflect, sidetrack, or avoid the topic."
+
+            "Respond only with what you'd say out loud — no written formatting, emojis, or special characters. "
+            "Convert the output text into a format suitable for text-to-speech. Ensure that numbers, symbols, and abbreviations are expanded for clarity when read aloud. Expand all abbreviations to their full spoken forms. "
+            "Example input and output:"
+            "\"$42.50\" → \"forty-two dollars and fifty cents\""
+            "\"1234\" → \"one thousand two hundred thirty-four\""
+            "\"3.14\" → \"three point one four\""
+            "\"555-555-5555\" → \"five five five, five five five, five five five five\""
+            "\"2nd\" → \"second\""
+            "\"3.5\" → \"three point five\""
+            "\"Dr.\" → \"Doctor\""
+            "\"Ave.\" → \"Avenue\""
+            "\"St.\" → \"Street\" (but saints like \"St. Patrick\" should remain)"
+            "\"Ctrl + Z\" → \"control z\""
+            "\"100km\" → \"one hundred kilometers\""
+            "\"100%\" → \"one hundred percent\""
+            "\"callia.com/docs\" → \"callia dot com slash docs\""
+            "\"2024-01-01\" → \"January first, two-thousand twenty-four\""
+            "\"123 Main St, Anytown, USA\" → \"one two three Main Street, Anytown, United States of America\""
+            "\"14:30\" → \"two thirty PM\""
+            "\"01/02/2023\" → \"January second, two-thousand twenty-three\""
         ),
         MessagesPlaceholder(variable_name="messages"),
     ]
 )
-
 
 # -----------------------------
 # Define the LangGraph 
