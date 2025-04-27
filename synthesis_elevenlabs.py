@@ -34,6 +34,7 @@ def is_installed(lib_name: str) -> bool:
     return shutil.which(lib_name) is not None
 
 def stream(audio_stream: Iterator[bytes], stop_event: threading.Event) -> bytes:
+    stop_event.clear()
     if not is_installed("mpv"):
         message = (
             "mpv not found, necessary to stream audio. "
@@ -60,7 +61,7 @@ def stream(audio_stream: Iterator[bytes], stop_event: threading.Event) -> bytes:
                 mpv_process.stdin.flush()
                 audio += chunk
     except ApiError as e:
-        print("API Error: Retrying with different key!")
+        print(f"API Error: {e.body['detail']['message']}. Retrying with different key!\n")
         synthesize_audio(cached_input, stop_event)
     finally:
         if mpv_process.stdin:

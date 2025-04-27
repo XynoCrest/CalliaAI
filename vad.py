@@ -81,6 +81,5 @@ def process_audio():
                     vad_iterator.reset_states()
 
                     # Make API Call to Groq in a different thread for transcription
-                    speech_stop_event.clear()
                     transcription_thread = threading.Thread(target=transcribe_audio, args=(audio_bytes, speech_stop_event), daemon=True)
                     transcription_thread.start()

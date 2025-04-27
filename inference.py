@@ -47,6 +47,7 @@ prompt_template = ChatPromptTemplate.from_messages(
             "\"2024-01-01\" → \"January first, two-thousand twenty-four\""
             "\"123 Main St, Anytown, USA\" → \"one two three Main Street, Anytown, United States of America\""
             "\"14:30\" → \"two thirty PM\""
+            "\"8:00 AM\" -> \"eight AM\""
             "\"01/02/2023\" → \"January second, two-thousand twenty-three\""
         ),
         MessagesPlaceholder(variable_name="messages"),
