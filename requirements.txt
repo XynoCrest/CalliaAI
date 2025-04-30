@@ -8,6 +8,5 @@ langgraph
 langchain-core
 langchain_groq
 groq
-cartesia
 elevenlabs
 inflect

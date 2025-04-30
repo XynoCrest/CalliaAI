@@ -42,12 +42,10 @@ Callia is a modular real-time voice assistant that is attuned to your every word
 <br>
 
 ## 🔑 API Keys
-Please insert your API keys for the services you would like to use in `key_retriever.py`
+Please insert your API keys in `key_retriever.py`
 
 [![ElevenLabs](https://img.shields.io/badge/ElevenLabs-black?style=flat-square&logo=elevenlabs&labelColor=black&color=gray)](https://elevenlabs.io/)
 [![Groq](https://img.shields.io/badge/Groq-black?style=flat-square&logo=grocy&labelColor=black&color=cd393a)](https://groq.com/)
-[![Cartesia](https://img.shields.io/badge/Cartesia-black?style=flat-square&logo=c&labelColor=black&color=blue)](https://cartesia.ai/)
-
 
 ```python
 def get_elevenlabs_key():
@@ -55,19 +53,6 @@ def get_elevenlabs_key():
     keys = []   <- Add your key as a list item
 ```
 - At least one **GROQ** API Key is required!
-<br>
-
-## 🔄 Switching TTS Engines
-To use a different voice engine (like **ElevenLabs**), change this line in `config.py`:
-
-[![ElevenLabs](https://img.shields.io/badge/ElevenLabs-black?style=flat-square&logo=elevenlabs&labelColor=black&color=gray)](https://elevenlabs.io/)
-[![Groq](https://img.shields.io/badge/Groq-black?style=flat-square&logo=grocy&labelColor=black&color=cd393a)](https://groq.com/)
-[![Cartesia](https://img.shields.io/badge/Cartesia-black?style=flat-square&logo=c&labelColor=black&color=blue)](https://cartesia.ai/)
-
-
-```python
-speech_synthesizer = "elevenlabs"
-```
 <br>
 
 ## ▶️ Running Callia
@@ -92,9 +77,7 @@ Callia/
 ├── vad_model.jit                # TorchScript compiled AI model
 ├── transcriber.py               # Speech-to-text handler
 ├── inference.py                 # Generates Text-to-Text Response
-├── synthesis_groq.py            # TTS using PlayAI
-├── synthesis_cartesia.py        # TTS using Cartesia
-├── synthesis_elevenlabs.py      # TTS using ElevenLabs
+├── synthesis.py                 # TTS using ElevenLabs
 ├── key_retriever.py             # Your API key(s) retriever
 ├── requirements.txt             # Dependencies
 ├── .gitignore                   # Tells git what to ignore

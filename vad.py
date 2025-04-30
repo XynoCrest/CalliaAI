@@ -58,9 +58,14 @@ def process_audio():
         # Inference chunk
         vad_output = vad_iterator(audio_tensor)
         if vad_output is not None and len(vad_output) > 0:
+            
+            # Cancel Ongoing Speech if there is any
+            from synthesis import mpv_process
+            if mpv_process and "start" in vad_output:
+                mpv_process.kill()
+                mpv_process = None
+            
             print(vad_output)
-            # Set thread stop_event to stop currently generating speech
-            speech_stop_event.set()
 
             vad_outputs.append(vad_output)
             if "end" in vad_outputs[-1]:
@@ -81,5 +86,5 @@ def process_audio():
                     vad_iterator.reset_states()
 
                     # Make API Call to Groq in a different thread for transcription
-                    transcription_thread = threading.Thread(target=transcribe_audio, args=(audio_bytes, speech_stop_event), daemon=True)
+                    transcription_thread = threading.Thread(target=transcribe_audio, args=(audio_bytes,), daemon=True)
                     transcription_thread.start()

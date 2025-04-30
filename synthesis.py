@@ -4,9 +4,10 @@ from key_retriever import get_elevenlabs_key
 import shutil
 import subprocess
 from typing import Iterator
-import threading
 
-def synthesize_audio(input: str, stop_event):
+mpv_process = None
+
+def synthesize_audio(input: str):
     # Initialize the Eleven Labs client
     client = ElevenLabs(
       api_key = get_elevenlabs_key(),
@@ -27,14 +28,13 @@ def synthesize_audio(input: str, stop_event):
     cached_input = input
 
     # Generate and Stream speech from the input text
-    stream(audio_stream, stop_event)
+    stream(audio_stream)
     return
 
 def is_installed(lib_name: str) -> bool:
     return shutil.which(lib_name) is not None
 
-def stream(audio_stream: Iterator[bytes], stop_event: threading.Event) -> bytes:
-    stop_event.clear()
+def stream(audio_stream: Iterator[bytes]) -> bytes:
     if not is_installed("mpv"):
         message = (
             "mpv not found, necessary to stream audio. "
@@ -44,6 +44,7 @@ def stream(audio_stream: Iterator[bytes], stop_event: threading.Event) -> bytes:
         raise ValueError(message)
 
     mpv_command = ["mpv", "--no-cache", "--no-terminal", "--", "fd://0"]
+    global mpv_process
     mpv_process = subprocess.Popen(
         mpv_command,
         stdin=subprocess.PIPE,
@@ -54,18 +55,23 @@ def stream(audio_stream: Iterator[bytes], stop_event: threading.Event) -> bytes:
     audio = b""
     try:
         for chunk in audio_stream:
-            if stop_event.is_set():
-                break
-            if chunk is not None:
-                mpv_process.stdin.write(chunk)
-                mpv_process.stdin.flush()
+            if chunk:
+                try:
+                    mpv_process.stdin.write(chunk)
+                    mpv_process.stdin.flush()
+                except:
+                    break
                 audio += chunk
     except ApiError as e:
         print(f"API Error: {e.body['detail']['message']}. Retrying with different key!\n")
-        synthesize_audio(cached_input, stop_event)
+        synthesize_audio(cached_input)
     finally:
         if mpv_process.stdin:
-            mpv_process.stdin.close()
+            try:
+                mpv_process.stdin.close()
+            except:
+                pass
         mpv_process.wait()
+        mpv_process = None
 
     return audio
