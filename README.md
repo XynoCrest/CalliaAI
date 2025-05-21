@@ -52,7 +52,7 @@ def get_elevenlabs_key():
     # List of ElevenLabs Keys
     keys = []   <- Add your key as a list item
 ```
-- At least one **GROQ** API Key is required!
+- At least one **GROQ** and one **ElevenLabs** API Key is required!
 <br>
 
 ## ▶️ Running Callia
