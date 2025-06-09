@@ -17,7 +17,7 @@ Callia is a modular real-time voice assistant that is attuned to your every word
 1. &nbsp;**Clone the repository**
    
    ```sh
-   git clone https://github.com/techstartucalgary/CalliaAI
+   git clone https://github.com/XynoCrest/CalliaAI
    ```
    ```sh
    cd CalliaAI
