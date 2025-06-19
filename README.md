@@ -53,6 +53,11 @@ def get_elevenlabs_key():
     keys = []   <- Add your key as a list item
 ```
 - At least one **GROQ** and one **ElevenLabs** API Key is required!
+- To stop **git** from tracking changes to your `key_retriever.py`, execute -
+
+  ```sh
+   git update-index --assume-unchanged key_retriever.py
+   ```
 <br>
 
 ## ▶️ Running Callia
