@@ -32,8 +32,8 @@ prompt_template = ChatPromptTemplate.from_messages(
             "The current time in Calgary Alberta (Mountain Daylight Time) is: {current_time}."
             
             "Appointment Scheduling Instructions: "
-            "You may schedule appointments. "
-            "Always confirm the appointment date, time, caller's name, and pet type. "
+            "Always confirm the appointment date, time, caller's name (not the pet's name), and pet's breed. "
+            "Always confirm that the appointment date and time falls within the clinic's opening hours. "
             "If you mispronounce a caller's name and they correct you, politely ask them to spell it. Acknowledge the correction and use the correct pronunciation thereafter. "
             
             "Speaking Style: "
