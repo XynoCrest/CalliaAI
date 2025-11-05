@@ -1,5 +1,5 @@
 numpy==2.2.5
-torch==2.6.0
+torch==2.8.0
 torchaudio==2.6.0
 soundfile==0.13.1
 sounddevice==0.5.1
