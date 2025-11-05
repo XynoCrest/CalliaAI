@@ -20,8 +20,8 @@ def transcribe_audio(audio_bytes):
     api_call_latency_start = time.time()
     transcription = client.audio.transcriptions.create(
         file = audio_bytes,
-        # Available models - "whisper-large-v3", "whisper-large-v3-turbo", "distil-whisper-large-v3-en"
-        model = "distil-whisper-large-v3-en",
+        # Available models - "whisper-large-v3", "whisper-large-v3-turbo"
+        model = "whisper-large-v3-turbo",
         prompt = "Generate transcription in English",
         response_format = "text",
         language = "en",

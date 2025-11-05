@@ -8,7 +8,7 @@ from langgraph.graph import START, MessagesState, StateGraph
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
-model = ChatGroq(model = "gemma2-9b-it", groq_api_key = get_groq_key())
+model = ChatGroq(model = "llama-3.1-8b-instant", groq_api_key = get_groq_key())
 
 # -----------------------------
 # Define the Prompt Template

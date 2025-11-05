@@ -14,7 +14,7 @@ def synthesize_audio(input: str):
     )
 
     # Create an audio stream object
-    audio_stream = client.text_to_speech.stream(
+    audio_stream = client.text_to_speech.convert_as_stream(
         text = input,
         # Voice IDs
         # Brittney - "kPzsL2i3teMYv0FxEYQ6"
