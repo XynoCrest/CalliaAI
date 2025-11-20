@@ -5,7 +5,7 @@ soundfile==0.13.1
 sounddevice==0.5.1
 langchain==0.3.23
 langgraph==0.3.31
-langchain-core==0.3.54
+langchain-core==0.3.80
 langchain_groq==0.3.2
 groq==0.22.0
 elevenlabs==1.56.0
